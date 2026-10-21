@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ethan Chun Fung Au-Yeung</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Ethan Chun Fung Au-Yeung — Computer Science at UMass Amherst. Hackathon projects in ML, data and full-stack.">
+<meta property="og:title" content="Ethan Chun Fung Au-Yeung">
+<meta property="og:description" content="CS at UMass Amherst. Data, ML and full-stack hackathon projects.">
+<meta property="og:image" content="img/umass-banner.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314161a'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='700' font-size='30' text-anchor='middle' fill='%23f0b45c'%3EEA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark-first single column (max 1080px); banner + overlapping portrait, then hero with a side "next up" card,
+   then card sections. Accent is the amber of the sunset on the UMass skyline; maroon is a quiet second note. */
+:root {
+  --bg: #121417;
+  --surface: #1a1d22;
+  --surface-2: #22262c;
+  --line: #2b3038;
+  --fg: #eef0f3;
+  --muted: #a3a9b4;
+  --accent: #f0b45c;
+  --accent-ink: #1b1408;
+  --accent-soft: rgba(240, 180, 92, .12);
+  --maroon: #c1525a;
+  --chart-a: #f0b45c;
+  --chart-b: #7d8695;
+  --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f7f6f3; --surface: #ffffff; --surface-2: #f0eee9; --line: #e2dfd8;
+    --fg: #17191d; --muted: #5d636e; --accent: #a8620a; --accent-ink: #ffffff;
+    --accent-soft: rgba(168, 98, 10, .1); --maroon: #881c1c; --chart-a: #c27612; --chart-b: #9aa1ab;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f7f6f3; --surface: #ffffff; --surface-2: #f0eee9; --line: #e2dfd8;
+  --fg: #17191d; --muted: #5d636e; --accent: #a8620a; --accent-ink: #ffffff;
+  --accent-soft: rgba(168, 98, 10, .1); --maroon: #881c1c; --chart-a: #c27612; --chart-b: #9aa1ab;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* Nav */
+nav.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+nav.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; }
+.brand { font-family: var(--display); font-weight: 800; font-size: 19px; text-decoration: none; letter-spacing: -0.01em; }
+.dot { color: var(--accent); }
+.nav-links { display: flex; align-items: center; gap: 22px; font-size: 15px; }
+.nav-links a { text-decoration: none; color: var(--muted); }
+.nav-links a:hover { color: var(--fg); }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--body); font-weight: 600; font-size: 15px; text-decoration: none;
+  padding: 11px 18px; border-radius: 10px; border: 1px solid transparent; cursor: pointer;
+  transition: transform .15s, background .15s, border-color .15s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--accent); color: var(--accent-ink) !important; }
+.btn-ghost { background: var(--surface); border-color: var(--line); color: var(--fg) !important; }
+.btn-ghost:hover { border-color: var(--accent); }
+.nav-links .btn { padding: 9px 16px; font-size: 14px; }
+
+/* Banner + portrait */
+.banner { margin-top: 28px; position: relative; }
+.banner-img {
+  width: 100%; aspect-ratio: 1140 / 285; object-fit: cover;
+  border-radius: 18px; border: 1px solid var(--line);
+}
+.banner-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding-inline: 28px; margin-top: -72px; position: relative; }
+.portrait {
+  width: 148px; height: 148px; border-radius: 50%; object-fit: cover;
+  border: 5px solid var(--bg); background: var(--surface); flex: none;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.where { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-bottom: 6px; text-align: right; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 48px; align-items: end; margin-top: 36px; }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0; }
+h1 {
+  font-family: var(--display); font-weight: 800; letter-spacing: -0.035em;
+  font-size: clamp(48px, 9vw, 92px); line-height: .95; margin: 14px 0 22px; text-wrap: balance;
+}
+.tagline { font-family: var(--display); font-weight: 500; font-size: clamp(22px, 3vw, 30px); line-height: 1.25; margin: 0 0 18px; letter-spacing: -0.01em; }
+.tagline span { color: var(--muted); }
+.bio { color: var(--muted); font-size: 17px; max-width: 60ch; margin: 0 0 26px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+.socials { display: flex; flex-wrap: wrap; gap: 20px; font-size: 15px; }
+.socials a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.socials a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.next {
+  border-left: 2px solid var(--accent); padding: 4px 0 4px 22px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.next h3 { font-family: var(--display); font-size: 21px; margin: 0; line-height: 1.25; }
+.next .meta { font-size: 14px; color: var(--accent); }
+.next p { margin: 0; color: var(--muted); font-size: 15px; }
+.next .count { font-family: var(--mono); font-size: 13px; color: var(--fg); background: var(--accent-soft); padding: 4px 10px; border-radius: 999px; align-self: flex-start; }
+
+/* Stat strip */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 56px; border-block: 1px solid var(--line); }
+.stat { padding: 22px 4px; display: flex; flex-direction: column; gap: 2px; }
+.stat + .stat { border-left: 1px solid var(--line); padding-left: 24px; }
+.stat b { font-family: var(--display); font-size: 34px; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 14px; color: var(--muted); }
+
+/* Section scaffolding */
+section { padding-top: 88px; scroll-margin-top: 72px; }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+h2 { font-family: var(--display); font-weight: 700; font-size: clamp(28px, 4vw, 36px); letter-spacing: -0.02em; margin: 8px 0 0; }
+.sec-head a { color: var(--accent); text-decoration: none; font-weight: 500; font-size: 15px; }
+
+/* Project cards */
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+  overflow: hidden; display: flex; flex-direction: column; min-width: 0;
+  transition: border-color .2s, transform .2s;
+}
+.card:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); transform: translateY(-2px); }
+.card.wide { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+.visual { background: var(--surface-2); border-bottom: 1px solid var(--line); display: grid; place-items: center; min-height: 260px; position: relative; overflow: hidden; }
+.card.wide .visual { border-bottom: 0; border-right: 1px solid var(--line); min-height: 100%; }
+.visual img { width: 100%; height: 100%; object-fit: cover; object-position: left center; }
+.card.wide .visual { background: #f6f1ec; }
+.card.wide .visual img { object-fit: contain; object-position: center; }
+.visual svg { width: 100%; height: auto; max-height: 300px; padding: 22px; }
+.visual .cap { position: absolute; left: 14px; bottom: 12px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); background: color-mix(in srgb, var(--bg) 80%, transparent); padding: 3px 8px; border-radius: 6px; }
+.body { padding: 26px 26px 28px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.kicker { font-size: 14px; color: var(--accent); margin: 0; }
+.card h3 { font-family: var(--display); font-weight: 700; font-size: 25px; letter-spacing: -0.015em; margin: 0; line-height: 1.2; }
+.award { align-self: flex-start; font-family: var(--mono); font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.card p { margin: 0; color: var(--muted); }
+.card ul { margin: 0; padding-left: 18px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+.card li::marker { color: var(--accent); }
+.num { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { font-family: var(--mono); font-size: 12px; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); padding: 3px 9px; border-radius: 6px; }
+.links { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 4px; font-size: 15px; }
+.links a { color: var(--fg); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--line); }
+.links a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Mini bar chart (Medtrics) */
+.minibar { display: flex; flex-direction: column; gap: 8px; margin-top: 2px; padding: 14px 16px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; }
+.minibar .t { font-size: 13px; color: var(--muted); }
+.minibar .row { display: grid; grid-template-columns: 120px minmax(0, 1fr) 56px; align-items: center; gap: 10px; font-size: 13.5px; }
+.minibar .track { height: 10px; background: var(--bg); border-radius: 99px; overflow: hidden; }
+.minibar .fill { height: 100%; border-radius: 99px; }
+.minibar .v { font-family: var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+
+/* SVG chart tokens */
+.s-grid { stroke: var(--line); stroke-width: 1; }
+.s-axis { fill: var(--muted); font-family: var(--mono); font-size: 11px; }
+.s-label { fill: var(--fg); font-family: var(--body); font-size: 13px; font-weight: 600; }
+.s-sub { fill: var(--muted); font-family: var(--mono); font-size: 10.5px; }
+.s-box { fill: var(--surface); stroke: var(--line); stroke-width: 1.2; }
+.s-box-hi { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
+.s-arrow { stroke: var(--muted); stroke-width: 1.4; fill: none; }
+.s-line { stroke: var(--chart-a); stroke-width: 2.5; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.s-area { fill: var(--accent-soft); }
+.s-band { fill: var(--chart-a); opacity: .14; }
+.s-dot { fill: var(--chart-a); stroke: var(--surface-2); stroke-width: 3; }
+.s-flag { stroke: var(--chart-a); stroke-dasharray: 3 4; stroke-width: 1.3; }
+
+/* Hackathon timeline */
+.timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-left: 1px solid var(--line); margin-left: 6px; }
+.tl { position: relative; padding: 0 0 34px 30px; display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 6px 24px; }
+.tl:last-child { padding-bottom: 0; }
+.tl::before { content: ""; position: absolute; left: -7px; top: 6px; width: 13px; height: 13px; border-radius: 50%; background: var(--bg); border: 2px solid var(--muted); }
+.tl.win::before { border-color: var(--accent); background: var(--accent); }
+.tl.soon::before { border-color: var(--accent); border-style: dashed; }
+.tl .date { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 2px; font-variant-numeric: tabular-nums; }
+.tl h4 { margin: 0; font-family: var(--display); font-size: 19px; font-weight: 700; }
+.tl p { margin: 4px 0 0; color: var(--muted); max-width: 62ch; }
+.tl .tag { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+
+/* Generic panels */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; }
+.row-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; }
+.row-head h3 { font-family: var(--display); font-size: 20px; margin: 0; }
+.when { font-family: var(--mono); font-size: 13px; color: var(--muted); white-space: nowrap; }
+.sub { color: var(--accent); font-size: 14.5px; margin: 4px 0 12px; }
+.panel ul { margin: 0; padding-left: 18px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+.panel li::marker { color: var(--accent); }
+.mini { display: flex; flex-direction: column; margin-top: 18px; border-top: 1px solid var(--line); }
+.mini div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.mini div:last-child { border-bottom: 0; padding-bottom: 0; }
+.mini b { font-weight: 600; }
+
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 40px; }
+.skills h4 { margin: 0 0 10px; font-size: 15px; font-weight: 600; }
+
+/* Contact */
+.contact { margin-top: 96px; padding-block: 44px; border-block: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.contact h2 { font-size: clamp(34px, 5vw, 48px); margin-top: 10px; }
+.contact p { color: var(--muted); margin: 10px 0 0; }
+.email { font-family: var(--mono); font-size: 14px; color: var(--muted); margin-top: 8px; user-select: all; }
+footer { padding-block: 28px 40px; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 32px; }
+  .projects, .two, .skills { grid-template-columns: 1fr; }
+  .card.wide { grid-template-columns: 1fr; }
+  .card.wide .visual { border-right: 0; border-bottom: 1px solid var(--line); }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat:nth-child(3) { border-left: 0; padding-left: 4px; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 600px) {
+  .nav-links a:not(.btn) { display: none; }
+  .banner-row { padding-inline: 12px; margin-top: -52px; }
+  .portrait { width: 108px; height: 108px; border-width: 4px; }
+  .where { font-size: 12px; }
+  .tl { grid-template-columns: 1fr; padding-left: 24px; }
+  .panel { padding: 22px 20px; }
+  .body { padding: 22px 20px 24px; }
+  .minibar .row { grid-template-columns: 96px minmax(0, 1fr) 50px; }
+  section { padding-top: 68px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top">Ethan Chun Fung Au-Yeung<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="#work">Projects</a>
+      <a href="#hackathons">Hackathons</a>
+      <a href="#about">About</a>
+      <a class="btn btn-primary" href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <div class="banner">
+    <img class="banner-img" src="img/umass-banner.jpg" alt="UMass Amherst campus at sunset with the Du Bois Library tower and the Holyoke Range behind it">
+    <div class="banner-row">
+      <img class="portrait" src="img/ethan.jpg" alt="Portrait of Ethan Chun Fung Au-Yeung">
+      <div class="where">Amherst, MA</div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Computer Science at UMass Amherst</p>
+      <h1>Ethan Chun Fung Au&#8209;Yeung<span class="dot">.</span></h1>
+      <p class="tagline">Turning messy data into a clear story.<br><span>Then building the app around it.</span></p>
+      <p class="bio">I'm a CS student who learns by shipping. Most of what I build happens in a weekend: ML models for NBA games, a flight-price forecaster, and a hospital-outcomes study that won at ASA DataFest. I work in Java, Python and R, and I speak English, Cantonese and Mandarin.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#work">See my projects →</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+      <div class="socials">
+        <a href="https://github.com/ethancfay" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/ethanay" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://devpost.com/eauyeung" target="_blank" rel="noopener">Devpost ↗</a>
+      </div>
+    </div>
+    <aside class="next" aria-label="Next up">
+      <p class="eyebrow">Next up</p>
+      <h3>Hackachusetts 2026</h3>
+      <span class="meta">Mass AI Coalition · Healthcare &amp; Biotech</span>
+      <p>Building with a five-person team of bio, data science, informatics and engineering majors.</p>
+      <span class="count" id="countdown">Oct 24, 2026</span>
+    </aside>
+  </div>
+
+  <div class="stats" role="list">
+    <div class="stat" role="listitem"><b>2</b><span>hackathon awards</span></div>
+    <div class="stat" role="listitem"><b>3</b><span>competitions in year one</span></div>
+    <div class="stat" role="listitem"><b>17,446</b><span>patients analyzed at DataFest</span></div>
+    <div class="stat" role="listitem"><b>&lt;200ms</b><span>live game predictions</span></div>
+  </div>
+
+  <!-- PROJECTS -->
+  <section id="work">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Learning by building</p>
+        <h2>Selected work</h2>
+      </div>
+      <a href="https://devpost.com/eauyeung" target="_blank" rel="noopener">All on Devpost →</a>
+    </div>
+
+    <div class="projects">
+      <!-- Medtrics -->
+      <article class="card wide">
+        <div class="visual">
+          <img src="img/medtrics-model.jpg" alt="Slide from the Medtrics presentation: forest plot of odds ratios for three logistic regression models, with summary boxes for survival, monitoring and retention">
+          <span class="cap">From our DataFest slides</span>
+        </div>
+        <div class="body">
+          <p class="kicker">Data science · R · April 2026</p>
+          <h3>Medtrics: elderly fracture outcomes</h3>
+          <span class="award">🏅 Best in Storytelling with Data · ASA DataFest</span>
+          <p>Four years of de-identified hospital data, one question: does activating a patient portal help elderly fracture patients survive?</p>
+          <div class="minibar" aria-label="Mortality for patients aged 65 and over">
+            <span class="t">Mortality, patients 65+</span>
+            <div class="row"><span>No MyChart</span><div class="track"><div class="fill" style="width:100%;background:var(--maroon)"></div></div><span class="v">23.3%</span></div>
+            <div class="row"><span>MyChart active</span><div class="track"><div class="fill" style="width:1.2%;min-width:4px;background:var(--chart-a)"></div></div><span class="v">0.14%</span></div>
+          </div>
+          <ul>
+            <li>Built 3 logistic regression models on <span class="num">17,446</span> patients (pseudo R² = <span class="num">0.45</span>).</li>
+            <li>A Baron-Kenny mediation test moved the odds ratio only <span class="num">−0.74%</span>, so the portal's effect is direct.</li>
+            <li>Projected <span class="num">$4.6M</span> in avoided readmissions if 10% of inactive patients sign up.</li>
+          </ul>
+          <div class="chips"><span>R</span><span>tidyverse</span><span>ggplot2</span><span>Logistic regression</span><span>Chi-square</span></div>
+          <div class="links"><a href="https://github.com/ethancfay/medtrics-datafest-2026" target="_blank" rel="noopener">Code ↗</a></div>
+        </div>
+      </article>
+
+      <!-- CourtVision -->
+      <article class="card">
+        <div class="visual">
+          <svg viewBox="0 0 420 270" role="img" aria-label="CourtVision architecture: NBA game data is ingested on a schedule into Supabase, an XGBoost model makes predictions cached in Redis, Gemini writes scouting reports and fact-checks, and a Next.js app on Vercel shows it all.">
+            <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+            <text x="210" y="16" text-anchor="middle" class="s-sub" letter-spacing="2">COURTVISION / DATA FLOW</text>
+            <rect x="12" y="38" width="118" height="50" rx="9" class="s-box"/>
+            <text x="71" y="60" text-anchor="middle" class="s-label">NBA game logs</text>
+            <text x="71" y="77" text-anchor="middle" class="s-sub">balldontlie API</text>
+            <rect x="151" y="38" width="118" height="50" rx="9" class="s-box"/>
+            <text x="210" y="60" text-anchor="middle" class="s-label">Scheduled ingest</text>
+            <text x="210" y="77" text-anchor="middle" class="s-sub">APScheduler</text>
+            <rect x="290" y="38" width="118" height="50" rx="9" class="s-box"/>
+            <text x="349" y="60" text-anchor="middle" class="s-label">Supabase</text>
+            <text x="349" y="77" text-anchor="middle" class="s-sub">Postgres</text>
+            <path d="M130 63H149" class="s-arrow" marker-end="url(#ah)"/>
+            <path d="M269 63H288" class="s-arrow" marker-end="url(#ah)"/>
+            <path d="M349 88V112H280" class="s-arrow" marker-end="url(#ah)"/>
+            <path d="M349 112V122" class="s-arrow"/>
+            <rect x="151" y="112" width="128" height="52" rx="9" class="s-box-hi"/>
+            <text x="215" y="134" text-anchor="middle" class="s-label">XGBoost model</text>
+            <text x="215" y="151" text-anchor="middle" class="s-sub">3 seasons of games</text>
+            <rect x="300" y="122" width="108" height="42" rx="9" class="s-box"/>
+            <text x="354" y="141" text-anchor="middle" class="s-label">Gemini 1.5</text>
+            <text x="354" y="156" text-anchor="middle" class="s-sub">scouting + fact-check</text>
+            <rect x="12" y="112" width="118" height="52" rx="9" class="s-box"/>
+            <text x="71" y="134" text-anchor="middle" class="s-label">Redis cache</text>
+            <text x="71" y="151" text-anchor="middle" class="s-sub">Upstash · &lt;200ms</text>
+            <path d="M151 138H132" class="s-arrow" marker-end="url(#ah)"/>
+            <rect x="80" y="196" width="260" height="54" rx="10" class="s-box"/>
+            <text x="210" y="219" text-anchor="middle" class="s-label">FastAPI → Next.js on Vercel</text>
+            <text x="210" y="237" text-anchor="middle" class="s-sub">predictions · player cards · take verdicts</text>
+            <path d="M71 164V180H180V194" class="s-arrow" marker-end="url(#ah)"/>
+            <path d="M354 164V180H240V194" class="s-arrow" marker-end="url(#ah)"/>
+          </svg>
+        </div>
+        <div class="body">
+          <p class="kicker">Full-stack ML · HACK(H)ER 413 · Feb 2026</p>
+          <h3>CourtVision</h3>
+          <span class="award">🏆 Best AI/ML Hack · 220+ participants</span>
+          <p>An NBA platform for new fans: tonight's game predictions, AI scouting reports, and a fact-checker for sports-media hot takes. Built in 24 hours.</p>
+          <ul>
+            <li>Trained XGBoost on <span class="num">3</span> seasons of game logs; served predictions in <span class="num">&lt;200ms</span> with Redis.</li>
+            <li>Gemini writes player scouting reports and grades media claims against the stats.</li>
+          </ul>
+          <div class="chips"><span>Python</span><span>FastAPI</span><span>XGBoost</span><span>Next.js</span><span>Supabase</span><span>Redis</span></div>
+          <div class="links">
+            <a href="https://github.com/codeArjya/CourtVision" target="_blank" rel="noopener">Code ↗</a>
+            <a href="https://devpost.com/software/courtvision-ydejwi" target="_blank" rel="noopener">Devpost ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- FlyWise -->
+      <article class="card">
+        <div class="visual">
+          <svg viewBox="0 0 420 270" role="img" aria-label="Illustrative chart: forecast fare against days before departure. Fares dip to a low around 45 days out, which FlyWise flags as the best time to book, then rise sharply in the final weeks.">
+            <text x="210" y="16" text-anchor="middle" class="s-sub" letter-spacing="2">FLYWISE / FARE FORECAST (ILLUSTRATIVE)</text>
+            <g>
+              <line x1="48" y1="50" x2="404" y2="50" class="s-grid"/>
+              <line x1="48" y1="100" x2="404" y2="100" class="s-grid"/>
+              <line x1="48" y1="150" x2="404" y2="150" class="s-grid"/>
+              <line x1="48" y1="200" x2="404" y2="200" class="s-grid"/>
+              <text x="40" y="54" text-anchor="end" class="s-axis">$600</text>
+              <text x="40" y="104" text-anchor="end" class="s-axis">$450</text>
+              <text x="40" y="154" text-anchor="end" class="s-axis">$300</text>
+              <text x="40" y="204" text-anchor="end" class="s-axis">$150</text>
+              <text x="48" y="226" text-anchor="middle" class="s-axis">90</text>
+              <text x="137" y="226" text-anchor="middle" class="s-axis">67</text>
+              <text x="226" y="226" text-anchor="middle" class="s-axis">45</text>
+              <text x="315" y="226" text-anchor="middle" class="s-axis">22</text>
+              <text x="404" y="226" text-anchor="middle" class="s-axis">0</text>
+              <text x="226" y="252" text-anchor="middle" class="s-sub">days before departure</text>
+            </g>
+            <!-- forecast band -->
+            <path d="M48 120 C 100 128, 150 150, 226 166 C 290 158, 340 120, 404 58 L 404 86 C 340 142, 290 178, 226 186 C 150 172, 100 150, 48 142 Z" class="s-band"/>
+            <path d="M48 131 C 100 139, 150 161, 226 176 C 290 168, 340 131, 404 72" class="s-line"/>
+            <line x1="226" y1="40" x2="226" y2="200" class="s-flag"/>
+            <circle cx="226" cy="176" r="7" class="s-dot"/>
+            <rect x="236" y="34" width="122" height="38" rx="8" class="s-box-hi"/>
+            <text x="297" y="52" text-anchor="middle" class="s-label" font-size="12">Best time to book</text>
+            <text x="297" y="65" text-anchor="middle" class="s-sub">forecast low · ~$270</text>
+          </svg>
+          <span class="cap">Example forecast, not real fares</span>
+        </div>
+        <div class="body">
+          <p class="kicker">Full-stack ML · HackUMass XIII · Nov 2025</p>
+          <h3>FlyWise</h3>
+          <p>A flight assistant that tells you when to book. It forecasts short-term fare trends, adds weather and delay context, and explains the call in plain language.</p>
+          <ul>
+            <li>FastAPI backend with an ML price forecast; React + TypeScript frontend.</li>
+            <li>Gemini turns the forecast into a short recommendation for the traveler.</li>
+          </ul>
+          <div class="chips"><span>Python</span><span>FastAPI</span><span>React</span><span>TypeScript</span><span>Gemini API</span></div>
+          <div class="links">
+            <a href="https://github.com/codeArjya/HackUMass25-FlyWise" target="_blank" rel="noopener">Code ↗</a>
+            <a href="https://devpost.com/software/flywise" target="_blank" rel="noopener">Devpost ↗</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- HACKATHONS -->
+  <section id="hackathons">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Weekends well spent</p>
+        <h2>Hackathons &amp; competitions</h2>
+      </div>
+    </div>
+    <ol class="timeline">
+      <li class="tl soon">
+        <span class="date">Oct 2026</span>
+        <div><span class="tag">Coming up</span><h4>Hackachusetts</h4><p>Mass AI Coalition hackathon, Healthcare &amp; Biotech track.</p></div>
+      </li>
+      <li class="tl win">
+        <span class="date">Apr 2026</span>
+        <div><span class="tag">Best in Storytelling with Data</span><h4>ASA Five College DataFest</h4><p>Team Medtrics with Samantha Lau and Justin Fung. Found the one story in an unfamiliar hospital dataset and defended it to expert judges.</p></div>
+      </li>
+      <li class="tl win">
+        <span class="date">Feb 2026</span>
+        <div><span class="tag">Best AI/ML Hack</span><h4>HACK(H)ER 413</h4><p>24-hour build of CourtVision against 220+ participants.</p></div>
+      </li>
+      <li class="tl">
+        <span class="date">Nov 2025</span>
+        <div><span class="tag">First hackathon</span><h4>HackUMass XIII</h4><p>Built FlyWise, a flight-price forecaster, in my first semester.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ABOUT: education + experience -->
+  <section id="about">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Background</p>
+        <h2>Education &amp; experience</h2>
+      </div>
+    </div>
+    <div class="two">
+      <div class="panel">
+        <div class="row-head"><h3>University of Massachusetts Amherst</h3><span class="when">2025 – 2029</span></div>
+        <p class="sub">B.S. Computer Science · Dean's List, Spring 2026</p>
+        <ul>
+          <li>Data Structures (Java), Object-Oriented Programming</li>
+          <li>Linear Algebra, Discrete Mathematics, Probability for CS</li>
+          <li>C Programming</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="row-head"><h3>Tech Support Intern</h3><span class="when">2023 – 2024</span></div>
+        <p class="sub">Chinese Culture and Community Service Center · Gaithersburg, MD</p>
+        <ul>
+          <li>Helped about <span class="num">50</span> seniors a week with their devices across Windows, macOS and iOS.</li>
+          <li>Installed hardware, software and basic networking; scoped security camera installs.</li>
+        </ul>
+        <div class="mini">
+          <div><b>Medical Office Intern, CCACC Health Center</b><span class="when">Jan 2025</span></div>
+          <div><b>Assistant Project Engineer Intern, ECS Atlantic</b><span class="when">Mar 2023</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:22px">
+      <div class="skills">
+        <div><h4>Languages</h4><div class="chips"><span>Java</span><span>Python</span><span>R</span><span>C</span><span>TypeScript</span></div></div>
+        <div><h4>ML &amp; data</h4><div class="chips"><span>XGBoost</span><span>Logistic regression</span><span>Mediation analysis</span><span>tidyverse</span><span>ggplot2</span></div></div>
+        <div><h4>Web &amp; tools</h4><div class="chips"><span>FastAPI</span><span>React</span><span>Next.js</span><span>Supabase</span><span>Redis</span><span>Git</span></div></div>
+        <div><h4>AI APIs &amp; spoken</h4><div class="chips"><span>Gemini API</span><span>Groq API</span><span>English</span><span>Cantonese</span><span>Mandarin</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact" id="contact">
+    <div>
+      <p class="eyebrow">Open to Summer 2027 internships</p>
+      <h2>Let's talk.</h2>
+      <p>Hiring for data, ML or software roles, or need a hackathon teammate? Email me.</p>
+      <p class="email">ethancfauyeung@gmail.com</p>
+    </div>
+    <button class="btn btn-primary" id="copy" type="button">Copy email</button>
+  </div>
+
+  <footer>
+    <span>© 2026 Ethan Chun Fung Au-Yeung</span>
+    <span>Made at UMass Amherst</span>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var email = 'ethancfauyeung@gmail.com';
+  var b = document.getElementById('copy');
+  b.addEventListener('click', function () {
+    var ok = function () { b.textContent = 'Copied ✓'; setTimeout(function () { b.textContent = 'Copy email'; }, 1600); };
+    try { navigator.clipboard.writeText(email).then(ok, function () { window.location.href = 'mailto:' + email; }); }
+    catch (e) { window.location.href = 'mailto:' + email; }
+  });
+  // Countdown to Hackachusetts; switches off after the event
+  var el = document.getElementById('countdown');
+  var days = Math.ceil((new Date('2026-10-24T09:00:00-04:00') - new Date()) / 864e5);
+  if (days > 1) el.textContent = 'Oct 24, 2026 · in ' + days + ' days';
+  else if (days === 1) el.textContent = 'Oct 24, 2026 · tomorrow';
+  else if (days === 0) el.textContent = 'Happening today';
+  else el.textContent = 'Oct 24, 2026';
+})();
+</script>
+</body>
+</html>
