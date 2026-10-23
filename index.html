@@ -349,7 +349,7 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: 14px; display
       <!-- CourtVision -->
       <article class="card">
         <div class="visual">
-          <svg viewBox="0 0 420 270" role="img" aria-label="CourtVision architecture: NBA game data is ingested on a schedule into Supabase, an XGBoost model makes predictions cached in Redis, Gemini writes scouting reports and fact-checks, and a Next.js app on Vercel shows it all.">
+          <svg viewBox="0 0 420 270" role="img" aria-label="CourtVision architecture: NBA game data is ingested on a schedule into Supabase, an XGBoost model makes predictions cached in Redis, an LLM on Groq writes scouting reports and fact-checks, and a Next.js app on Vercel shows it all.">
             <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
             <text x="210" y="16" text-anchor="middle" class="s-sub" letter-spacing="2">COURTVISION / DATA FLOW</text>
             <rect x="12" y="38" width="118" height="50" rx="9" class="s-box"/>
@@ -369,7 +369,7 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: 14px; display
             <text x="215" y="134" text-anchor="middle" class="s-label">XGBoost model</text>
             <text x="215" y="151" text-anchor="middle" class="s-sub">3 seasons of games</text>
             <rect x="300" y="122" width="108" height="42" rx="9" class="s-box"/>
-            <text x="354" y="141" text-anchor="middle" class="s-label">Gemini 1.5</text>
+            <text x="354" y="141" text-anchor="middle" class="s-label">Groq LLM</text>
             <text x="354" y="156" text-anchor="middle" class="s-sub">scouting + fact-check</text>
             <rect x="12" y="112" width="118" height="52" rx="9" class="s-box"/>
             <text x="71" y="134" text-anchor="middle" class="s-label">Redis cache</text>
@@ -389,9 +389,9 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: 14px; display
           <p>An NBA platform for new fans: tonight's game predictions, AI scouting reports, and a fact-checker for sports-media hot takes. Built in 24 hours.</p>
           <ul>
             <li>Trained XGBoost on <span class="num">3</span> seasons of game logs; served predictions in <span class="num">&lt;200ms</span> with Redis.</li>
-            <li>Gemini writes player scouting reports and grades media claims against the stats.</li>
+            <li>An LLM on Groq (GPT-OSS 120B) writes player scouting reports and grades media claims against the stats.</li>
           </ul>
-          <div class="chips"><span>Python</span><span>FastAPI</span><span>XGBoost</span><span>Next.js</span><span>Supabase</span><span>Redis</span></div>
+          <div class="chips"><span>Python</span><span>FastAPI</span><span>XGBoost</span><span>Next.js</span><span>Supabase</span><span>Redis</span><span>Groq</span></div>
           <div class="links">
             <a href="https://court-vision-ten.vercel.app" target="_blank" rel="noopener">Live demo ↗</a>
             <a href="https://github.com/ethancfay/CourtVision" target="_blank" rel="noopener">Code ↗</a>
