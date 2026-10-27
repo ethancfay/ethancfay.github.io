@@ -157,6 +157,8 @@ h2 { font-family: var(--display); font-weight: 700; font-size: clamp(28px, 4vw, 
 .visual img { width: 100%; height: 100%; object-fit: cover; object-position: left center; }
 .card.wide .visual { background: #f6f1ec; }
 .card.wide .visual img { object-fit: contain; object-position: center; }
+.card.wide .visual.optics { background: #021a47; display: flex; align-items: center; }
+.card.wide .visual.optics img { object-fit: cover; }
 .visual svg { width: 100%; height: auto; max-height: 300px; padding: 22px; }
 .visual .cap { position: absolute; left: 14px; bottom: 12px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); background: color-mix(in srgb, var(--bg) 80%, transparent); padding: 3px 8px; border-radius: 6px; }
 .body { padding: 26px 26px 28px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
@@ -282,7 +284,7 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: 14px; display
       <p class="eyebrow">Computer Science at UMass Amherst</p>
       <h1>Ethan Chun Fung Au&#8209;Yeung<span class="dot">.</span></h1>
       <p class="tagline">Turning messy data into a clear story.<br><span>Then building the app around it.</span></p>
-      <p class="bio">I'm a CS student who learns by shipping. Most of what I build happens in a weekend: ML models for NBA games, a flight-price forecaster, and a hospital-outcomes study that won at ASA DataFest. I work in Java, Python and R, and I speak English, Cantonese and Mandarin.</p>
+      <p class="bio">I'm a CS student who learns by shipping. Most of what I build happens in a weekend: ML models for NBA games, a flight-price forecaster, a hospital-outcomes study that won at ASA DataFest, and a tool that finds under-studied diseases in Massachusetts. I work in Java, Python and R, and I speak English, Cantonese and Mandarin.</p>
       <div class="cta">
         <a class="btn btn-primary" href="#work">See my projects →</a>
         <a class="btn btn-ghost" href="#contact">Get in touch</a>
@@ -293,18 +295,18 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: 14px; display
         <a href="https://devpost.com/eauyeung" target="_blank" rel="noopener">Devpost ↗</a>
       </div>
     </div>
-    <aside class="next" aria-label="Next up">
-      <p class="eyebrow">Next up</p>
-      <h3>Hackachusetts 2026</h3>
-      <span class="meta">Mass AI Coalition · Healthcare &amp; Biotech</span>
-      <p>Building with a five-person team of bio, data science, informatics and engineering majors.</p>
-      <span class="count" id="countdown">Oct 24, 2026</span>
+    <aside class="next" aria-label="Latest build">
+      <p class="eyebrow">Latest build</p>
+      <h3>Optics: Research Gap Index</h3>
+      <span class="meta">Hackachusetts 2026 · Healthcare track</span>
+      <p>Which diseases get the least clinical research for how many Massachusetts adults have them?</p>
+      <a class="count" href="https://research-gap-index-web.vercel.app/" target="_blank" rel="noopener">Live demo ↗</a>
     </aside>
   </div>
 
   <div class="stats" role="list">
     <div class="stat" role="listitem"><b>2</b><span>hackathon awards</span></div>
-    <div class="stat" role="listitem"><b>3</b><span>competitions in year one</span></div>
+    <div class="stat" role="listitem"><b>4</b><span>hackathons &amp; competitions</span></div>
     <div class="stat" role="listitem"><b>17,446</b><span>patients analyzed at DataFest</span></div>
     <div class="stat" role="listitem"><b>&lt;200ms</b><span>live game predictions</span></div>
   </div>
@@ -320,6 +322,34 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: 14px; display
     </div>
 
     <div class="projects">
+      <!-- Optics -->
+      <article class="card wide">
+        <div class="visual optics">
+          <img src="https://raw.githubusercontent.com/ethancfay/Optics/main/docs/banner.png" alt="Optics: Research Gap Index logo on a navy background">
+        </div>
+        <div class="body">
+          <p class="kicker">Health data · Hackachusetts 2026 · Oct 2026</p>
+          <h3>Optics: Research Gap Index</h3>
+          <p>Compares how common a disease is among Massachusetts adults with how many clinical studies are recruiting for it in the state. It shows where research lags behind the number of people affected.</p>
+          <div class="minibar" aria-label="Recruiting Massachusetts studies per 100,000 affected adults, log scale: high cholesterol 0.25, asthma 1.22, diabetes 11.02">
+            <span class="t">MA studies per 100k affected adults (log scale)</span>
+            <div class="row"><span>High cholesterol</span><div class="track"><div class="fill" style="width:13%;background:var(--maroon)"></div></div><span class="v">0.25</span></div>
+            <div class="row"><span>Asthma</span><div class="track"><div class="fill" style="width:36%;background:var(--chart-a)"></div></div><span class="v">1.22</span></div>
+            <div class="row"><span>Diabetes</span><div class="track"><div class="fill" style="width:68%;background:var(--chart-a)"></div></div><span class="v">11.02</span></div>
+          </div>
+          <ul>
+            <li>Python pipeline joins ClinicalTrials.gov studies with CDC PLACES prevalence; each score is a range from CDC's confidence limits.</li>
+            <li>I wrote the dashboard spec and the scoring export that feeds the site. The export has <span class="num">350+</span> tests.</li>
+            <li>Built by a 4-person team on parallel spec branches, with every number linked to its source study.</li>
+          </ul>
+          <div class="chips"><span>Python</span><span>pytest</span><span>React</span><span>TypeScript</span><span>Vite</span><span>fast-check</span><span>Kiro</span></div>
+          <div class="links">
+            <a href="https://research-gap-index-web.vercel.app/" target="_blank" rel="noopener">Live demo ↗</a>
+            <a href="https://github.com/ethancfay/Optics" target="_blank" rel="noopener">Code ↗</a>
+          </div>
+        </div>
+      </article>
+
       <!-- Medtrics -->
       <article class="card wide">
         <div class="visual">
@@ -459,9 +489,9 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: 14px; display
       </div>
     </div>
     <ol class="timeline">
-      <li class="tl soon">
+      <li class="tl">
         <span class="date">Oct 2026</span>
-        <div><span class="tag">Coming up</span><h4>Hackachusetts</h4><p>Mass AI Coalition hackathon, Healthcare &amp; Biotech track.</p></div>
+        <div><span class="tag">Healthcare track</span><h4>Hackachusetts</h4><p>Built Optics, a research gap index for Massachusetts health data.</p></div>
       </li>
       <li class="tl win">
         <span class="date">Apr 2026</span>
@@ -514,7 +544,7 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: 14px; display
       <div class="skills">
         <div><h4>Languages</h4><div class="chips"><span>Java</span><span>Python</span><span>R</span><span>C</span><span>TypeScript</span></div></div>
         <div><h4>ML &amp; data</h4><div class="chips"><span>XGBoost</span><span>Logistic regression</span><span>Mediation analysis</span><span>tidyverse</span><span>ggplot2</span></div></div>
-        <div><h4>Web &amp; tools</h4><div class="chips"><span>FastAPI</span><span>React</span><span>Next.js</span><span>Supabase</span><span>Redis</span><span>Git</span></div></div>
+        <div><h4>Web &amp; tools</h4><div class="chips"><span>FastAPI</span><span>React</span><span>Next.js</span><span>Supabase</span><span>Redis</span><span>pytest</span><span>Git</span></div></div>
         <div><h4>AI APIs &amp; spoken</h4><div class="chips"><span>Gemini API</span><span>Groq API</span><span>English</span><span>Cantonese</span><span>Mandarin</span></div></div>
       </div>
     </div>
@@ -545,13 +575,6 @@ footer { padding-block: 28px 40px; color: var(--muted); font-size: 14px; display
     try { navigator.clipboard.writeText(email).then(ok, function () { window.location.href = 'mailto:' + email; }); }
     catch (e) { window.location.href = 'mailto:' + email; }
   });
-  // Countdown to Hackachusetts; switches off after the event
-  var el = document.getElementById('countdown');
-  var days = Math.ceil((new Date('2026-10-24T09:00:00-04:00') - new Date()) / 864e5);
-  if (days > 1) el.textContent = 'Oct 24, 2026 · in ' + days + ' days';
-  else if (days === 1) el.textContent = 'Oct 24, 2026 · tomorrow';
-  else if (days === 0) el.textContent = 'Happening today';
-  else el.textContent = 'Oct 24, 2026';
 })();
 </script>
 </body>
